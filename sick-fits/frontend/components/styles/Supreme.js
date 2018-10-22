@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'react-emotion'
 
 const Supreme = styled.h3`
   background: ${props => props.theme.red};

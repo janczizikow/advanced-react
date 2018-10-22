@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'react-emotion'
 
 const OrderItemStyles = styled.li`
   box-shadow: ${props => props.theme.bs};

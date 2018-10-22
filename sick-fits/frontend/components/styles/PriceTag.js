@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'react-emotion'
 
 const PriceTag = styled.span`
   background: ${props => props.theme.red};

@@ -1,5 +1,7 @@
 import App, { Container } from 'next/app';
+import { ThemeProvider } from 'emotion-theming';
 import Page from '../components/Page';
+import { theme } from '../utils/theme';
 
 class Root extends App {
   render() {
@@ -7,9 +9,11 @@ class Root extends App {
 
     return (
       <Container>
-        <Page>
-          <Component />
-        </Page>
+        <ThemeProvider theme={theme}>
+          <Page>
+            <Component />
+          </Page>
+        </ThemeProvider>
       </Container>
     )
   }
