@@ -1,6 +1,6 @@
 import styled from 'react-emotion'
 
-const NavStyles = styled.ul`
+const NavStyles = styled.nav`
   margin: 0;
   padding: 0;
   display: flex;
