@@ -1,8 +1,10 @@
 import App, { Container } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
+import { ApolloProvider } from 'react-apollo';
 import { injectGlobal } from 'emotion';
 import { ThemeProvider } from 'emotion-theming';
+import withData from '../lib/withData';
 import Page from '../components/Page';
 import { theme } from '../utils/theme';
 
@@ -27,6 +29,7 @@ injectGlobal`
     font-weight: normal;
     font-style: normal;
   }
+
   *::before,
   *::after,
   * {
@@ -53,19 +56,33 @@ injectGlobal`
 `;
 
 class Root extends App {
+  static async getInitialProps({ Component, ctx }) {
+    let pageProps = {};
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    // expose the query to the user
+    pageProps.query = ctx.query;
+    return { pageProps };
+  }
+
   render() {
-    const { Component } = this.props;
+    const { Component, apollo, pageProps } = this.props;
 
     return (
       <Container>
-        <ThemeProvider theme={theme}>
-          <Page>
-            <Component />
-          </Page>
-        </ThemeProvider>
+        <ApolloProvider client={apollo}>
+          <ThemeProvider theme={theme}>
+            <Page>
+              <Component {...pageProps} />
+            </Page>
+          </ThemeProvider>
+        </ApolloProvider>
       </Container>
     )
   }
 }
 
-export default Root;
+export default withData(Root);
