@@ -1,6 +1,5 @@
-import styled from 'react-emotion;
 import React from 'react';
-
+import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
 const ErrorStyles = styled.div`
