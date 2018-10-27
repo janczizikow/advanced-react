@@ -1,6 +1,6 @@
 const Mutations = {
-  async createUser(parent, args, context, info) {
-    const users = await contex.db.mutation.createUser({
+  async createUser(parent, args, ctx, info) {
+    const users = await ctx.db.mutation.createUser({
       data: {
         ...args
       }
@@ -8,9 +8,9 @@ const Mutations = {
     return users;
   },
 
-  async createItem(parent, args, context, info) {
+  async createItem(parent, args, ctx, info) {
     // TODO: Check if authenticated
-    const item = await context.db.mutation.createItem({
+    const item = await ctx.db.mutation.createItem({
       data: {
         ...args
       }
