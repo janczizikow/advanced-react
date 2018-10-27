@@ -74,7 +74,7 @@ class CreateItem extends Component {
                 />
               </label>
               <label htmlFor="description">
-                description
+                Description
                 <textarea
                   name="description"
                   placeholder="Description"
@@ -84,7 +84,7 @@ class CreateItem extends Component {
                 />
               </label>
               <label htmlFor="price">
-                price
+                Price
                 <input
                   type="number"
                   name="price"
