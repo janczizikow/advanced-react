@@ -4,17 +4,27 @@ import Nav from '../components/Nav';
 
 const Logo = styled.h1`
   margin-left: 2rem;
-  position: relative;
   font-size: 4rem;
-  transform: skew(-7deg);
   z-index: 2;
 
   a {
+    position: relative;
     padding: 0.5rem 1rem;
-    background: ${props => props.theme.red};
     color: white;
     text-transform: uppercase;
     text-decoration: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      background: ${props => props.theme.red};
+      transform: translate(-50%, -50%) skew(-7deg);
+      z-index: -1;
+    }
   }
 
   @media (max-width: 1300px) {
