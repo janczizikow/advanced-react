@@ -6,6 +6,7 @@ const Query = {
     return users;
   },
   items: forwardTo('db'),
+  item: forwardTo('db'),
 };
 
 module.exports = Query;
