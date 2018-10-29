@@ -1,4 +1,4 @@
-import UpdateItem from '../components/UpdateItem';
+import UpdateItem from "../components/UpdateItem";
 
 const Update = ({ query }) => (
   <div>

@@ -1,4 +1,4 @@
-import styled from 'react-emotion'
+import styled from "react-emotion";
 
 const NavStyles = styled.nav`
   margin: 0;
@@ -23,7 +23,7 @@ const NavStyles = styled.nav`
       padding: 0 10px;
     }
     &:before {
-      content: '';
+      content: "";
       width: 2px;
       background: ${props => props.theme.lightgrey};
       height: 100%;
@@ -36,7 +36,7 @@ const NavStyles = styled.nav`
     &:after {
       height: 2px;
       background: red;
-      content: '';
+      content: "";
       width: 0;
       position: absolute;
       transform: translateX(-50%);

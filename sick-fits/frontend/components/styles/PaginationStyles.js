@@ -1,4 +1,4 @@
-import styled from 'react-emotion'
+import styled from "react-emotion";
 
 const PaginationStyles = styled.div`
   text-align: center;
@@ -18,7 +18,7 @@ const PaginationStyles = styled.div`
       border-right: 0;
     }
   }
-  a[aria-disabled='true'] {
+  a[aria-disabled="true"] {
     color: grey;
     pointer-events: none;
   }

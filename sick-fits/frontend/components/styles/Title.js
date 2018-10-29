@@ -1,4 +1,4 @@
-import styled from 'react-emotion'
+import styled from "react-emotion";
 
 const Title = styled.h3`
   margin: 0 1rem;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
-import { ALL_ITEMS_QUERY } from './Items';
+import { ALL_ITEMS_QUERY } from "./Items";
 
 export const DELETE_ITEM_MUTATION = gql`
   mutation deleteItem($id: ID!) {
@@ -20,9 +20,9 @@ export default class DeleteItem extends Component {
     // 2. Filter the deleted item out of the page
     const items = data.items.filter(
       item => item.id !== payload.data.deleteItem.id
-    )
+    );
     // 3. Put the items back!
-    cache.writeQuery({ query: ALL_ITEMS_QUERY, data: { items } })
+    cache.writeQuery({ query: ALL_ITEMS_QUERY, data: { items } });
   };
 
   render() {

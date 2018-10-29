@@ -1,4 +1,4 @@
-import styled from 'react-emotion'
+import styled from "react-emotion";
 
 const SickButton = styled.button`
   background: red;

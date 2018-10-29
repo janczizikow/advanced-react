@@ -1,4 +1,4 @@
-import styled from 'react-emotion'
+import styled from "react-emotion";
 
 const OrderStyles = styled.div`
   max-width: 1000px;

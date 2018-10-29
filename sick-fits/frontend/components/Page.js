@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import styled from 'react-emotion';
-import Meta from '../components/Meta';
-import Header from '../components/Header';
+import React, { Component } from "react";
+import styled from "react-emotion";
+import Meta from "../components/Meta";
+import Header from "../components/Header";
 
 const Site = styled.div`
   display: flex;
@@ -26,9 +26,7 @@ class Page extends Component {
         <Meta />
         <SiteContent>
           <Header />
-          <Main>
-            {this.props.children}
-          </Main>
+          <Main>{this.props.children}</Main>
         </SiteContent>
       </Site>
     );

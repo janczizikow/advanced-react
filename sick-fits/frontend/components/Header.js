@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import styled from 'react-emotion'
-import Nav from '../components/Nav';
+import Link from "next/link";
+import styled from "react-emotion";
+import Nav from "../components/Nav";
 
 const Logo = styled.h1`
   margin-left: 2rem;
@@ -15,7 +15,7 @@ const Logo = styled.h1`
     text-decoration: none;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 50%;
       left: 50%;

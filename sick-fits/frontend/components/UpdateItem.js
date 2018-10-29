@@ -49,7 +49,7 @@ class UpdateItem extends Component {
     const res = await updateItemMutation({
       variables: {
         id: this.props.id,
-        ...this.state,
+        ...this.state
       }
     });
     Router.push({

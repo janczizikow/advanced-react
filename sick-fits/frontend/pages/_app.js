@@ -1,16 +1,16 @@
-import App, { Container } from 'next/app';
-import Router from 'next/router';
-import NProgress from 'nprogress';
-import { ApolloProvider } from 'react-apollo';
-import { injectGlobal } from 'emotion';
-import { ThemeProvider } from 'emotion-theming';
-import withData from '../lib/withData';
-import Page from '../components/Page';
-import { theme } from '../utils/theme';
+import App, { Container } from "next/app";
+import Router from "next/router";
+import NProgress from "nprogress";
+import { ApolloProvider } from "react-apollo";
+import { injectGlobal } from "emotion";
+import { ThemeProvider } from "emotion-theming";
+import withData from "../lib/withData";
+import Page from "../components/Page";
+import { theme } from "../utils/theme";
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
-}
+};
 
 Router.onRouteChangeComplete = () => {
   NProgress.done();
@@ -81,7 +81,7 @@ class Root extends App {
           </ThemeProvider>
         </ApolloProvider>
       </Container>
-    )
+    );
   }
 }
 
