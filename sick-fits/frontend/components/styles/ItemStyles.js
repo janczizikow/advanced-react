@@ -8,6 +8,7 @@ const Item = styled.div`
   display: flex;
   flex-direction: column;
   img {
+    background-color: ${props => props.theme.lightGrey};
     width: 100%;
     height: 400px;
     object-fit: cover;

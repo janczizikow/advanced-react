@@ -8,7 +8,7 @@ import DeleteItem from "./DeleteItem";
 
 const Item = ({ item }) => (
   <ItemStyles>
-    {item.image && <img src={item.image} alt={item.title} />}
+    <img src={item.image} alt={item.title} />
     <Title>
       <Link
         href={{
