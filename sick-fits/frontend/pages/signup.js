@@ -1,4 +1,5 @@
 import Signup from "../components/Signup";
+import Signin from "../components/Signin";
 
 const SignupPage = props => (
   <div
@@ -9,8 +10,7 @@ const SignupPage = props => (
     }}
   >
     <Signup />
-    <Signup />
-    <Signup />
+    <Signin />
   </div>
 );
 
