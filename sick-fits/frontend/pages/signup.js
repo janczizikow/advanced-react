@@ -1,5 +1,6 @@
 import Signup from "../components/Signup";
 import Signin from "../components/Signin";
+import RequestReset from "../components/RequestReset";
 
 const SignupPage = props => (
   <div
@@ -11,6 +12,7 @@ const SignupPage = props => (
   >
     <Signup />
     <Signin />
+    <RequestReset />
   </div>
 );
 
