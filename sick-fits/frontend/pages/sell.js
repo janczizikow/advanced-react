@@ -1,9 +1,10 @@
 import CreateItem from "../components/CreateItem";
+import Guard from "../components/Guard";
 
 const Sell = () => (
-  <div>
+  <Guard>
     <CreateItem />
-  </div>
+  </Guard>
 );
 
 export default Sell;

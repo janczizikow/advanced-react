@@ -14,6 +14,7 @@ type Mutation {
     password: String!
     confirmPassword: String!
   ): User!
+  updatePermissions(permission: [Permission], userId: ID!): User!
   createItem(
     title: String
     description: String

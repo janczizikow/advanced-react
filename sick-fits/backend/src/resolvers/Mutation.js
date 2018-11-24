@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { randomBytes } = require("crypto");
 const { promisify } = require("util");
 const { transport, makeANiceEmail } = require("../mail");
+const { hasPermission } = require("../utils");
 
 const Mutations = {
   async createUser(parent, args, ctx, info) {
@@ -129,11 +130,44 @@ const Mutations = {
 
     return updatedUser;
   },
+  async updatePermissions(parent, args, ctx, info) {
+    if (!ctx.request.userId) {
+      throw new Error("You must be logged in!");
+    }
+    const currentUser = await ctx.db.query.user(
+      { where: { id: ctx.request.userId } },
+      info
+    );
+
+    hasPermission(currentUser, ["ADMIN", "PERMISSIONUPDATE"]);
+
+    return ctx.db.mutation.updateUser(
+      {
+        data: {
+          permission: {
+            set: args.permission
+          }
+        },
+        where: {
+          id: args.userId
+        }
+      },
+      info
+    );
+  },
   async createItem(parent, args, ctx, info) {
-    // TODO: Check if authenticated
+    if (!ctx.request.userId) {
+      throw new Error("You must be logged in to add an item");
+    }
+
     const item = await ctx.db.mutation.createItem(
       {
         data: {
+          user: {
+            connect: {
+              id: ctx.request.userId
+            }
+          },
           ...args
         }
       },
@@ -145,7 +179,6 @@ const Mutations = {
 
   async updateItem(parent, args, ctx, info) {
     const updates = { ...args };
-    console.log(args);
     delete updates.id; // Don't overwrite the id
 
     const item = await ctx.db.mutation.updateItem(
@@ -161,10 +194,25 @@ const Mutations = {
   },
 
   async deleteItem(parent, args, ctx, info) {
+    if (!ctx.request.userId) {
+      throw new Error("You must be logged in!");
+    }
+
     const where = { id: args.id };
     // 1. find the item
-    const item = await ctx.db.query.item({ where }, `{ id, title }`);
-    // TODO: 2. Check if record.user === user || user is admin
+    const item = await ctx.db.query.item(
+      { where },
+      `{ id, title, user { id } }`
+    );
+    // 2. Check if record.user === user || user is admin
+    const ownsItem = item.user.id === ctx.request.userId;
+    const hasPermissions = ctx.request.user.permission.some(permission =>
+      ["ADMIN", "ITEMDELETE"].includes(permission)
+    );
+
+    if (!ownsItem || !hasPermission) {
+      throw new Error("You don't have permission to do that!");
+    }
 
     // 3. Delete it
     return ctx.db.mutation.deleteItem({ where }, info);
