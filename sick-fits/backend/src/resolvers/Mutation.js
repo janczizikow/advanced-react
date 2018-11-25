@@ -216,6 +216,73 @@ const Mutations = {
 
     // 3. Delete it
     return ctx.db.mutation.deleteItem({ where }, info);
+  },
+  async addToCart(parent, args, ctx, info) {
+    const { userId } = ctx.request;
+    if (!userId) {
+      throw new Error("You must be logged in!");
+    }
+
+    const [existingCartItem] = await ctx.db.query.cartItems({
+      where: {
+        user: { id: userId },
+        item: { id: args.id }
+      }
+    });
+    if (existingCartItem) {
+      return ctx.db.mutation.updateCartItem(
+        {
+          where: { id: existingCartItem.id },
+          data: {
+            quantity: existingCartItem.quantity + 1
+          }
+        },
+        info
+      );
+    } else {
+      return ctx.db.mutation.createCartItem(
+        {
+          data: {
+            user: {
+              connect: { id: userId }
+            },
+            item: {
+              connect: { id: args.id }
+            }
+          }
+        },
+        info
+      );
+    }
+  },
+  async removeFromCart(parent, args, ctx, info) {
+    const { userId } = ctx.request;
+    if (!userId) {
+      throw new Error("You must be logged in!");
+    }
+
+    const [cartItem] = await ctx.db.query.cartItems(
+      {
+        where: {
+          id: args.id,
+          user: { id: userId }
+        }
+      },
+      `{ id, user { id } }`
+    );
+
+    if (!cartItem || cartItem.user.id !== userId) {
+      throw new Error("Item not found in your cart");
+    }
+
+    return ctx.db.mutation.deleteCartItem(
+      {
+        where: {
+          id: args.id
+        }
+      },
+      info
+    );
   }
 };
 

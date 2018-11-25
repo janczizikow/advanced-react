@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styled from "react-emotion";
 import Nav from "../components/Nav";
+import Cart from "../components/Cart";
 
 const Logo = styled.h1`
   margin-left: 2rem;
@@ -66,7 +67,7 @@ const Header = () => (
     <div className="sub-bar">
       <p>Search</p>
     </div>
-    <div>Cart</div>
+    <Cart />
   </StyledHeader>
 );
 
