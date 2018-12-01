@@ -25,7 +25,45 @@ const Query = {
   },
   items: forwardTo("db"),
   item: forwardTo("db"),
-  itemsConnection: forwardTo("db")
+  itemsConnection: forwardTo("db"),
+  async order(parent, args, ctx, info) {
+    // 1. Make sure user is logged in
+    const { userId } = ctx.request;
+
+    if (!userId) {
+      throw new Error("You must be logged in!");
+    }
+    // 2. Query the current order
+    const order = await ctx.db.query.order({ where: { id: args.id } }, info);
+
+    // 3. Check if the user has permissions to see this order
+    const ownsOrder = order.user.id === userId;
+    const hasPermission = ctx.request.user.permission.includes("ADMIN");
+
+    if (!ownsOrder || !hasPermission) {
+      throw new Error("Order not found in your order");
+    }
+    // 4. Return the order
+    return order;
+  },
+  async orders(parent, args, ctx, info) {
+    // 1. Make sure user is logged in
+    const { userId } = ctx.request;
+
+    if (!userId) {
+      throw new Error("You must be logged in!");
+    }
+
+    // 2. Query user orders
+    const orders = await ctx.db.query.orders(
+      {
+        where: { user: { id: userId } }
+      },
+      info
+    );
+
+    return orders;
+  }
 };
 
 module.exports = Query;

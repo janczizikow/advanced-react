@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "react-emotion";
 import Meta from "../components/Meta";
 import Header from "../components/Header";
@@ -19,18 +19,14 @@ const Main = styled.main`
   max-width: ${p => p.theme.maxWidth};
 `;
 
-class Page extends Component {
-  render() {
-    return (
-      <Site>
-        <Meta />
-        <SiteContent>
-          <Header />
-          <Main>{this.props.children}</Main>
-        </SiteContent>
-      </Site>
-    );
-  }
-}
+const Page = ({ children }) => (
+  <Site>
+    <Meta />
+    <SiteContent>
+      <Header />
+      <Main>{children}</Main>
+    </SiteContent>
+  </Site>
+);
 
 export default Page;
